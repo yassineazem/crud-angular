@@ -14,15 +14,10 @@ export class RestApiService {
 
   constructor(private http: HttpClient) { }
 
-  httpOption = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
 
-  getEmployees(): Observable<Employee> {
+  getEmployees(): Observable<Employee[]> {
     return this.http
-      .get<Employee>(this.apiUrl + '/employees')
+      .get<Employee[]>(this.apiUrl + '/employees')
       .pipe(retry(1), catchError(this.handleError))
   }
 

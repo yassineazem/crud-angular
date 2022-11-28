@@ -1,6 +1,6 @@
 export interface Employee {
-  id: number | undefined;
+  id?: number;
   name: string;
   email: string;
-  phone?: number | null;
+  phone?: number;
 }

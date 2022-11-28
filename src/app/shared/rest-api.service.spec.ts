@@ -11,7 +11,7 @@ describe('RestApiService',
       providers: [ RestApiService, {
         provide: "url",
         useValue: "apiUrl"
-      } ]
+      }]
     }));
 
     let service: RestApiService;
@@ -31,8 +31,8 @@ describe('RestApiService',
       ];
 
     beforeEach(() => {
-      TestBed.configureTestingModule({});
       service = TestBed.inject(RestApiService);
+      httpTestingController = TestBed.inject(HttpTestingController);
     });
 
     afterEach(() => {
@@ -47,7 +47,8 @@ describe('RestApiService',
       service.getEmployees().subscribe(res => {
         return expect(res).toEqual(mockData);
       })
-      const req = httpTestingController.expectOne('apiUrl');
+      const req = httpTestingController.expectOne('http://localhost:3000/employees');
+      req.flush(mockData);
       expect(req.request.method).toBe('GET');
     });
   });
